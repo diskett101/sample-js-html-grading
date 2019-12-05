@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GRADEs</title>
+  <style>
+    body {
+      font-size: 20px;
+      font-family: "Arial"
+    }
+    #table_input {
+      width: 50%;
+      float: left;
+      border: 1px solid #000;
+      padding: 5px;
+    }
+    #table_input td {
+      padding: 2px;
+    }
+    #table_input .subj_code{
+      width: 70%;
+    }
+    #table_input .subj_code input {
+      text-transform: uppercase;
+    }
+    #table_input input{
+      width: 100%;
+      line-height: 50px;
+      font-size: 45px;
+    }
+
+    #table_output {
+      width: 50%;
+      float: right;
+      border: 1px solid #000;
+      padding: 5px;
+    }
+    #table_output td {
+      padding: 2px;
+      line-height: 50px;
+      font-size: 45px;
+      height: 54px;
+      border: 1px solid #ccc;
+    }
+    #table_output .subj_code{
+      text-transform: uppercase;
+      width: 70%;
+    }
+    #table_output input{
+      width: 100%;
+    }
+    #pass_or_fail {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <table id="table_input">
+    <thead>
+      <tr>
+        <th class="subj_code">SUBJ CODE</th>
+        <th>GRADE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="subj_code">
+          <input type="text" id="subj_1">
+        </td>
+        <td>
+          <input type="number" id="grade_1" min="1" max="100">
+        </td>
+      </tr>
+      <tr>
+        <td class="subj_code">
+          <input type="text" id="subj_2">
+        </td>
+        <td>
+          <input type="number" id="grade_2" min="1" max="100">
+        </td>
+      </tr>
+      <tr>
+        <td class="subj_code">
+          <input type="text" id="subj_3">
+        </td>
+        <td>
+          <input type="number" id="grade_3" min="1" max="100">
+        </td>
+      </tr>
+      <tr>
+        <td class="subj_code">
+          <input type="text" id="subj_4">
+        </td>
+        <td>
+          <input type="number" id="grade_4" min="1" max="100">
+        </td>
+      </tr>
+      <tr>
+        <td class="subj_code">
+          <input type="text" id="subj_5">
+        </td>
+        <td>
+          <input type="number" id="grade_5" min="1" max="100">
+        </td>
+      </tr>
+      <tr>
+        <td class="subj_code">
+          <input type="text" id="subj_6">
+        </td>
+        <td>
+          <input type="number" id="grade_6" min="1" max="100">
+        </td>
+      </tr>
+      <tr>
+        <td class="subj_code">
+          <input type="text" id="subj_7">
+        </td>
+        <td>
+          <input type="number" id="grade_7" min="1" max="100">
+        </td>
+      </tr>
+      <tr>
+        <td class="subj_code">
+          <input type="text" id="subj_8">
+        </td>
+        <td>
+          <input type="number" id="grade_8" min="1" max="100">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table id="table_output">
+    <thead>
+      <tr>
+        <th class="subj_code">SUBJ CODE</th>
+        <th>GRADE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="subj_code" id="subj_1_display">
+
+        </td>
+        <td id="grade_1_display">
+
+        </td>
+      </tr>
+      <tr>
+        <td class="subj_code" id="subj_2_display">
+
+        </td>
+        <td id="grade_2_display">
+
+        </td>
+      </tr>
+      <tr>
+        <td class="subj_code" id="subj_3_display">
+
+        </td>
+        <td id="grade_3_display">
+
+        </td>
+      </tr>
+      <tr>
+        <td class="subj_code" id="subj_4_display">
+
+        </td>
+        <td id="grade_4_display">
+
+        </td>
+      </tr>
+      <tr>
+        <td class="subj_code" id="subj_5_display">
+
+        </td>
+        <td id="grade_5_display">
+
+        </td>
+      </tr>
+      <tr>
+        <td class="subj_code" id="subj_6_display">
+
+        </td>
+        <td id="grade_6_display">
+
+        </td>
+      </tr>
+      <tr>
+        <td class="subj_code" id="subj_7_display">
+
+        </td>
+        <td id="grade_7_display">
+
+        </td>
+      </tr>
+      <tr>
+        <td class="subj_code" id="subj_8_display">
+
+        </td>
+        <td id="grade_8_display">
+
+        </td>
+      </tr>
+      <tr>
+        <td class="subj_code">
+          AVERAGE:
+        </td>
+        <td id="average_result">
+
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" id="pass_or_fail">
+
+        </td>
+      </tr>
+    </tbody>
+
+
+    <script>
+      document.onkeyup = function (e) {
+        var average_result = 0
+        var total_grades = 0
+
+        var passing_rate = 75;
+
+        var subj_code_1 = document.getElementById("subj_1").value;
+        var subj_grade_1 = (document.getElementById("grade_1").value != '') ? document.getElementById("grade_1").value : '';
+        total_grades = (subj_grade_1 > 0) ? (total_grades + +subj_grade_1) : total_grades;
+
+        var subj_code_2 = document.getElementById("subj_2").value;
+        var subj_grade_2 = (document.getElementById("grade_2").value != '') ? document.getElementById("grade_2").value : '';
+        total_grades = (subj_grade_2 > 0) ? (total_grades + +subj_grade_2) : total_grades;
+
+        var subj_code_3 = document.getElementById("subj_3").value;
+        var subj_grade_3 = (document.getElementById("grade_3").value != '') ? document.getElementById("grade_3").value : '';
+        total_grades = (subj_grade_3 > 0) ? (total_grades + +subj_grade_3) : total_grades;
+
+        var subj_code_4 = document.getElementById("subj_4").value;
+        var subj_grade_4 = (document.getElementById("grade_4").value != '') ? document.getElementById("grade_4").value : '';
+        total_grades = (subj_grade_4 > 0) ? (total_grades + +subj_grade_4) : total_grades;
+
+        var subj_code_5 = document.getElementById("subj_5").value;
+        var subj_grade_5 = (document.getElementById("grade_5").value != '') ? document.getElementById("grade_5").value : '';
+        total_grades = (subj_grade_5 > 0) ? (total_grades + +subj_grade_5) : total_grades;
+
+        var subj_code_6 = document.getElementById("subj_6").value;
+        var subj_grade_6 = (document.getElementById("grade_6").value != '') ? document.getElementById("grade_6").value : '';
+        total_grades = (subj_grade_6 > 0) ? (total_grades + +subj_grade_6) : total_grades;
+
+        var subj_code_7 = document.getElementById("subj_7").value;
+        var subj_grade_7 = (document.getElementById("grade_7").value != '') ? document.getElementById("grade_7").value : '';
+        total_grades = (subj_grade_7 > 0) ? (total_grades + +subj_grade_7) : total_grades;
+
+        var subj_code_8 = document.getElementById("subj_8").value;
+        var subj_grade_8 = (document.getElementById("grade_8").value != '') ? document.getElementById("grade_8").value : '';
+        total_grades = (subj_grade_8 > 0) ? (total_grades + +subj_grade_8) : total_grades;
+
+        average_result = total_grades / 8;
+
+        document.getElementById('subj_1_display').innerHTML = subj_code_1
+        document.getElementById('grade_1_display').innerHTML = subj_grade_1
+
+        document.getElementById('subj_2_display').innerHTML = subj_code_2
+        document.getElementById('grade_2_display').innerHTML = subj_grade_2
+
+        document.getElementById('subj_3_display').innerHTML = subj_code_3
+        document.getElementById('grade_3_display').innerHTML = subj_grade_3
+
+        document.getElementById('subj_4_display').innerHTML = subj_code_4
+        document.getElementById('grade_4_display').innerHTML = subj_grade_4
+
+        document.getElementById('subj_5_display').innerHTML = subj_code_5
+        document.getElementById('grade_5_display').innerHTML = subj_grade_5
+
+        document.getElementById('subj_6_display').innerHTML = subj_code_6
+        document.getElementById('grade_6_display').innerHTML = subj_grade_6
+
+        document.getElementById('subj_7_display').innerHTML = subj_code_7
+        document.getElementById('grade_7_display').innerHTML = subj_grade_7
+
+        document.getElementById('subj_8_display').innerHTML = subj_code_8
+        document.getElementById('grade_8_display').innerHTML = subj_grade_8
+
+        document.getElementById('average_result').innerHTML = (average_result == 0 ? '' : average_result)
+        document.getElementById('pass_or_fail').innerHTML = (average_result > passing_rate) ? "PASSED" : "FAILED"
+
+      }
+    </script>
+  </body>
+  </html>
